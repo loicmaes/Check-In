@@ -7,8 +7,9 @@ import {toTypedSchema} from "@vee-validate/zod";
 import * as z from "zod";
 import {useForm} from "vee-validate";
 import {Input} from "~/components/ui/input";
-import {PASSWORD_REGEX} from "~/utils/regex";
+import {USERNAME_REGEX, PASSWORD_REGEX} from "~/utils/regex";
 import {Separator} from "~/components/ui/separator";
+import { registerUser } from "#imports";
 
 const schema = toTypedSchema(z.object({
   username: z.string().min(1).regex(USERNAME_REGEX),
@@ -18,8 +19,8 @@ const schema = toTypedSchema(z.object({
 const { handleSubmit } = useForm({
   validationSchema: schema,
 });
-const register = handleSubmit(async ({ username, email, password }) => {
-  // TODO: use fetch and create the account.
+const register = handleSubmit(async (values) => {
+  await registerUser(values);
 });
 </script>
 

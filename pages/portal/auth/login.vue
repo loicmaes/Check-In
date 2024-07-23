@@ -7,7 +7,7 @@ import {toTypedSchema} from "@vee-validate/zod";
 import * as z from "zod";
 import {useForm} from "vee-validate";
 import {Input} from "~/components/ui/input";
-import {PASSWORD_REGEX} from "~/utils/regex";
+import {USERNAME_REGEX, PASSWORD_REGEX} from "~/utils/regex";
 import {Separator} from "~/components/ui/separator";
 
 const schema = toTypedSchema(z.object({
@@ -17,8 +17,9 @@ const schema = toTypedSchema(z.object({
 const { handleSubmit } = useForm({
   validationSchema: schema,
 });
-const register = handleSubmit(async ({ username, password }) => {
+const register = handleSubmit(async (values) => {
   // TODO: use fetch and create the account.
+  console.table(values);
 });
 </script>
 

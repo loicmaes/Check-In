@@ -2,6 +2,9 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "prisma": {
+    "schema": "server/database/schema.prisma"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -14,6 +17,7 @@
     "@iconoir/vue": "^7.8.0",
     "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@prisma/client": "5.18.0-dev.8",
     "@vee-validate/nuxt": "^4.13.2",
     "@vee-validate/zod": "^4.13.2",
     "@vueuse/core": "^10.11.0",
@@ -36,6 +40,7 @@
     "eslint": "^9.7.0",
     "eslint-plugin-vue": "^9.27.0",
     "globals": "^15.8.0",
+    "prisma": "^5.17.0",
     "sass": "^1.77.8",
     "typescript-eslint": "^7.17.0"
   }

@@ -25,6 +25,7 @@ export default [
       "semi": ["error", "always"],
       "quotes": ["error", "double"],
       "vue/multi-word-component-names": "off",
+      "no-unused-import": "error"
     }
   }
 ];

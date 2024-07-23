@@ -1,11 +1,14 @@
 <script setup lang="ts">
-
+import {Button} from "~/components/ui/button";
 </script>
 
 <template>
-  <h1>Home</h1>
+  <div class="flex flex-col">
+    <h1>Home</h1>
+    <Button as-child>
+      <NuxtLink to="/auth/login">
+        Login
+      </NuxtLink>
+    </Button>
+  </div>
 </template>
-
-<style scoped>
-
-</style>

@@ -7,12 +7,12 @@ import {Button} from "~/components/ui/button";
     <h1>Home</h1>
     <div class="flex gap-2">
       <Button variant="secondary" as-child>
-        <NuxtLink to="/auth/login">
+        <NuxtLink to="/portal/auth/login">
           Login
         </NuxtLink>
       </Button>
       <Button as-child>
-        <NuxtLink to="/auth/login">
+        <NuxtLink to="/portal/auth/register">
           Register
         </NuxtLink>
       </Button>

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { IconoirProvider } from "@iconoir/vue";
 import {Toaster} from "~/components/ui/toast";
+import {useUser} from "~/composables/auth";
+
+await useUser();
 </script>
 
 <template>

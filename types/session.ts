@@ -17,3 +17,17 @@ export interface IAuthSessionCreateBody {
 export interface IAuthSessionOptions {
   keep?: boolean;
 }
+export interface IAuthSessionRecoverBody {
+  userUid: string;
+  token: string;
+}
+export class AuthSessionNotFound extends Error {
+  constructor () {
+    super("Your session couldn't be found!");
+  }
+}
+export class NotGenuineAuthSession extends Error {
+  constructor () {
+    super("Your session is not genuine!");
+  }
+}

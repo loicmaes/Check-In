@@ -1,8 +1,25 @@
 import type {IUser, IUserCreateBody} from "~/types/user";
 import type {IAuthSessionLoginBody} from "~/types/session";
-import {useState, navigateTo} from "#imports";
+import {useState, navigateTo, useCookie} from "#imports";
 import {useToast} from "~/components/ui/toast";
 import {FetchError} from "ofetch";
+
+export const useAuthCookie = () => useCookie("auth-token");
+
+export async function useUser (): Promise<IUser | undefined> {
+  if (!useAuthCookie()) return undefined;
+  const user = useState<IUser>("user");
+
+  if (!user.value) {
+    const { data } = await useFetch("/api/auth/me", {
+      headers: useRequestHeaders(["cookie"])
+    });
+    if (!data.value) return undefined;
+    user.value = data.value;
+  }
+
+  return user.value;
+}
 
 export async function registerUser (values: IUserCreateBody): Promise<void> {
   const { toast } = useToast();

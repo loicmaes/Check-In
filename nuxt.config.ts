@@ -6,7 +6,8 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
     "shadcn-nuxt",
-    "@nuxtjs/eslint-module"
+    "@nuxtjs/eslint-module",
+    "@vee-validate/nuxt"
   ],
   colorMode: {
     classSuffix: "",
@@ -22,5 +23,12 @@ export default defineNuxtConfig({
   shadcn: {
     prefix: "Ui",
     componentDir: "components/ui",
+  },
+  vite: {
+    optimizeDeps: {
+      exclude: [
+          "vee-validate"
+      ]
+    }
   }
 });

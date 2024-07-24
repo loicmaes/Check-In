@@ -2,6 +2,9 @@
   "name": "nuxt-app",
   "private": true,
   "type": "module",
+  "prisma": {
+    "schema": "server/database/schema.prisma"
+  },
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -11,8 +14,14 @@
     "lint": "eslint . --fix"
   },
   "dependencies": {
+    "@iconoir/vue": "^7.8.0",
     "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/eslint-module": "^4.1.0",
+    "@prisma/client": "^5.17.0",
+    "@vee-validate/nuxt": "^4.13.2",
+    "@vee-validate/zod": "^4.13.2",
+    "@vueuse/core": "^10.11.0",
+    "argon2": "^0.40.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-vue-next": "^0.414.0",
@@ -21,7 +30,9 @@
     "shadcn-nuxt": "^0.10.4",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
-    "vue": "latest"
+    "vee-validate": "^4.13.2",
+    "vue": "latest",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.7.0",
@@ -30,6 +41,7 @@
     "eslint": "^9.7.0",
     "eslint-plugin-vue": "^9.27.0",
     "globals": "^15.8.0",
+    "prisma": "^5.17.0",
     "sass": "^1.77.8",
     "typescript-eslint": "^7.17.0"
   }

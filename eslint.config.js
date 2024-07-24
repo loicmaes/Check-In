@@ -9,7 +9,8 @@ export default [
       "**/.nuxt/*",
       "**/node_modules/*",
       "**/.idea/*",
-      "**/.git/*"
+      "**/.git/*",
+      "**/components/ui/*",
     ]
   },
   {

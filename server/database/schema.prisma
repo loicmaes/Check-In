@@ -1,0 +1,35 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["omitApi"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  uid       String   @id @default(uuid())
+  username  String   @unique @db.VarChar(24)
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  authSessions AuthSession[]
+
+  @@map("users")
+}
+
+model AuthSession {
+  userUid   String
+  token     String   @default(uuid())
+  agent     String
+  startedAt DateTime @default(now())
+  expiresAt DateTime
+
+  user User @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+
+  @@id([userUid, token])
+  @@map("authSessions")
+}

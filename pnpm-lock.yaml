@@ -18,8 +18,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(eslint@9.7.0)(magicast@0.3.4)(rollup@4.19.0)(vite@5.3.4(@types/node@20.14.11)(sass@1.77.8)(terser@5.31.3))(webpack@5.93.0)
       '@prisma/client':
-        specifier: 5.18.0-dev.8
-        version: 5.18.0-dev.8(prisma@5.17.0)
+        specifier: ^5.17.0
+        version: 5.17.0(prisma@5.17.0)
       '@vee-validate/nuxt':
         specifier: ^4.13.2
         version: 4.13.2(magicast@0.3.4)(rollup@4.19.0)(vue@3.4.33(typescript@5.5.4))
@@ -29,6 +29,9 @@ importers:
       '@vueuse/core':
         specifier: ^10.11.0
         version: 10.11.0(vue@3.4.33(typescript@5.5.4))
+      argon2:
+        specifier: ^0.40.3
+        version: 0.40.3
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
@@ -1001,6 +1004,10 @@ packages:
     resolution: {integrity: sha512-HNjmfLQEVRZmHRET336f20H/8kOozUGwk7yajvsonjNxbj2wBTK1WsQuHkD5yYh9RxFGL2EyDHryOihOwUoKDA==}
     engines: {node: '>= 10.0.0'}
 
+  '@phc/format@1.0.0':
+    resolution: {integrity: sha512-m7X9U6BG2+J+R1lSOdCiITLLrxm+cWlNI3HUFA92oLO77ObGNzaKdh8pMLqdZcshtkKuV84olNNXDfMc4FezBQ==}
+    engines: {node: '>=10'}
+
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -1012,8 +1019,8 @@ packages:
   '@polka/url@1.0.0-next.25':
     resolution: {integrity: sha512-j7P6Rgr3mmtdkeDGTe0E/aYyWEWVtc5yFXtHCRHs28/jptDEWfaVOc5T7cblqy1XKPPfCxJc/8DwQ5YgLOZOVQ==}
 
-  '@prisma/client@5.18.0-dev.8':
-    resolution: {integrity: sha512-c2qqljH+IpORuaKxIgppwYdWA0q1WMbP6if0pCg11db6lHWE6CcgyDpDPk3s7kcXut+F5LQVi6MPH8KFOPXP9A==}
+  '@prisma/client@5.17.0':
+    resolution: {integrity: sha512-N2tnyKayT0Zf7mHjwEyE8iG7FwTmXDHFZ1GnNhQp0pJUObsuel4ZZ1XwfuAYkq5mRIiC/Kot0kt0tGCfLJ70Jw==}
     engines: {node: '>=16.13'}
     peerDependencies:
       prisma: '*'
@@ -1633,6 +1640,10 @@ packages:
 
   arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
+
+  argon2@0.40.3:
+    resolution: {integrity: sha512-FrSmz4VeM91jwFvvjsQv9GYp6o/kARWoYKjbjDB2U5io1H3e5X67PYGclFDeQff6UXIhUd4aHR3mxCdBbMMuQw==}
+    engines: {node: '>=16.17.0'}
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
@@ -3121,6 +3132,10 @@ packages:
 
   node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
+
+  node-addon-api@8.1.0:
+    resolution: {integrity: sha512-yBY+qqWSv3dWKGODD6OGE6GnTX7Q2r+4+DfpqxHSHh8x0B4EKP9+wVGLS6U/AM1vxSNNmUEuIV5EGhYwPpfOwQ==}
+    engines: {node: ^18 || ^20 || >= 21}
 
   node-fetch-native@1.6.4:
     resolution: {integrity: sha512-IhOigYzAKHd244OC0JIMIUrjzctirCmPkaIfhDeGcEETWof5zKYUW7e7MYvChGWh/4CJeXEgsRyGzuF334rOOQ==}
@@ -5590,6 +5605,8 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.4.1
       '@parcel/watcher-win32-x64': 2.4.1
 
+  '@phc/format@1.0.0': {}
+
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
@@ -5597,7 +5614,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.25': {}
 
-  '@prisma/client@5.18.0-dev.8(prisma@5.17.0)':
+  '@prisma/client@5.17.0(prisma@5.17.0)':
     optionalDependencies:
       prisma: 5.17.0
 
@@ -6350,6 +6367,12 @@ snapshots:
       readable-stream: 3.6.2
 
   arg@5.0.2: {}
+
+  argon2@0.40.3:
+    dependencies:
+      '@phc/format': 1.0.0
+      node-addon-api: 8.1.0
+      node-gyp-build: 4.8.1
 
   argparse@2.0.1: {}
 
@@ -8000,6 +8023,8 @@ snapshots:
       - uWebSockets.js
 
   node-addon-api@7.1.1: {}
+
+  node-addon-api@8.1.0: {}
 
   node-fetch-native@1.6.4: {}
 

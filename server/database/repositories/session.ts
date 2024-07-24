@@ -27,7 +27,7 @@ export async function isGenuine (body: IAuthSessionRecoverBody): Promise<boolean
     }
   });
 }
-export async function recoverAuthSession(body: IAuthSessionRecoverBody): Promise<IAuthSession> {
+export async function recoverAuthSession (body: IAuthSessionRecoverBody): Promise<IAuthSession> {
   const session = await prisma.authSession.findUnique({
     where: {
       userUid_token: {
@@ -38,4 +38,21 @@ export async function recoverAuthSession(body: IAuthSessionRecoverBody): Promise
   });
   if (!session) throw new AuthSessionNotFound();
   return session;
+}
+export async function deleteAuthSession (body: IAuthSessionRecoverBody) {
+  return prisma.authSession.delete({
+    where: {
+      userUid_token: {
+        userUid: body.userUid,
+        token: body.token,
+      }
+    }
+  });
+}
+export async function deleteAllAuthSessions (userUid: string) {
+  return prisma.authSession.deleteMany({
+    where: {
+      userUid,
+    }
+  });
 }

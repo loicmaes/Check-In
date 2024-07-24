@@ -1,18 +1,20 @@
 import {IUser, IUserCreateBody} from "~/types/user";
 import {
-  AuthSessionNotFound,
   IAuthSession,
   IAuthSessionCreateBody,
   IAuthSessionLoginBody,
   IAuthSessionOptions,
   IAuthSessionRecoverBody, NotGenuineAuthSession
 } from "~/types/session";
-import {createError, getCookie, sendError, setCookie} from "#imports";
+import {getCookie, setCookie} from "#imports";
 import {EventHandlerRequest, H3Event} from "h3";
 import {createUser, recoverUserByUid, recoverUserByUsername} from "~/server/database/repositories/user";
-import {createSession, isGenuine, recoverAuthSession} from "~/server/database/repositories/session";
+import {
+  createSession,
+  deleteAllAuthSessions, deleteAuthSession,
+  isGenuine,
+} from "~/server/database/repositories/session";
 import argon2 from "argon2";
-import {INTERNAL_SERVER_ERROR} from "~/utils/messages";
 import {MissingRequiredFields} from "~/types/request";
 
 export async function register (event: H3Event<EventHandlerRequest>, body: IUserCreateBody, sessionOptions?: IAuthSessionOptions): Promise<IUser> {
@@ -62,4 +64,21 @@ export async function authenticate (event: H3Event<EventHandlerRequest>, body: I
   })) throw new NotGenuineAuthSession();
 
   return await recoverUserByUid(body.userUid);
+}
+export async function logout (event: H3Event<EventHandlerRequest>, large: boolean = false) {
+  const userUid = getCookie(event, "user-uid");
+  const token = getCookie(event, "auth-token");
+
+  if (!userUid) throw new MissingRequiredFields("COOKIE: user-uid");
+  if (large) await deleteAllAuthSessions(userUid);
+  else {
+    if (!token) throw new MissingRequiredFields("COOKIE: auth-token");
+    await deleteAuthSession({
+      userUid,
+      token,
+    });
+  }
+
+  setCookie(event, "user-uid", "");
+  setCookie(event, "auth-token", "");
 }

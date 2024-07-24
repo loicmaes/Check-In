@@ -2,6 +2,7 @@
 import {Button} from "~/components/ui/button";
 import {type IUser} from "~/types/user";
 import {useState} from "#imports";
+import {logoutUser} from "~/composables/auth";
 
 const user = useState<IUser>("user");
 </script>
@@ -9,7 +10,8 @@ const user = useState<IUser>("user");
 <template>
   <div class="flex flex-col items-start">
     <h1>{{ user ? `Welcome ${user.username}` : "Home" }}</h1>
-    <div class="flex gap-2">
+    <Button variant="destructive" @click="logoutUser" v-if="user">Logout</Button>
+    <div class="flex gap-2" v-else>
       <Button variant="secondary" as-child>
         <NuxtLink to="/portal/auth/login">
           Login

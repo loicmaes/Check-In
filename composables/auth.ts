@@ -65,3 +65,21 @@ export async function loginUser (values: IAuthSessionLoginBody): Promise<void> {
     });
   }
 }
+export async function logoutUser (all: boolean = false) {
+  try {
+    await $fetch("/api/auth/logout", {
+      headers: useRequestHeaders(["cookie"]),
+      method: "DELETE",
+      body: {
+        all
+      }
+    });
+    useState("user").value = null;
+  } catch (e) {
+    useToast().toast({
+      title: "Oops... 💢",
+      description: (e as FetchError).statusMessage,
+      variant: "destructive",
+    });
+  }
+}

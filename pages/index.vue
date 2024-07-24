@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import {Button} from "~/components/ui/button";
+import {type IUser} from "~/types/user";
+import {useState} from "#imports";
+
+const user = useState<IUser>("user");
 </script>
 
 <template>
   <div class="flex flex-col items-start">
-    <h1>Home</h1>
+    <h1>{{ user ? `Welcome ${user.username}` : "Home" }}</h1>
     <div class="flex gap-2">
       <Button variant="secondary" as-child>
         <NuxtLink to="/portal/auth/login">

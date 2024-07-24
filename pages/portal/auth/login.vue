@@ -9,6 +9,7 @@ import {useForm} from "vee-validate";
 import {Input} from "~/components/ui/input";
 import {USERNAME_REGEX, PASSWORD_REGEX} from "~/utils/regex";
 import {Separator} from "~/components/ui/separator";
+import {loginUser} from "~/composables/auth";
 
 const schema = toTypedSchema(z.object({
   username: z.string().min(1).regex(USERNAME_REGEX),
@@ -17,10 +18,7 @@ const schema = toTypedSchema(z.object({
 const { handleSubmit } = useForm({
   validationSchema: schema,
 });
-const register = handleSubmit(async (values) => {
-  // TODO: use fetch and create the account.
-  console.table(values);
-});
+const login = handleSubmit(async (values) => await loginUser(values));
 </script>
 
 <template>
@@ -36,7 +34,7 @@ const register = handleSubmit(async (values) => {
     </CardHeader>
     <Separator />
     <CardContent class="p-6">
-      <form class="flex flex-col gap-3" @submit="register">
+      <form class="flex flex-col gap-3" @submit="login">
         <FormField name="username" v-slot="{ componentField }">
           <FormItem>
             <FormLabel>Username</FormLabel>

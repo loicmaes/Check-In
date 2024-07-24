@@ -5,6 +5,10 @@ export interface IAuthSession {
   startedAt: Date;
   expiresAt: Date;
 }
+export interface IAuthSessionLoginBody {
+  username: string;
+  password: string;
+}
 export interface IAuthSessionCreateBody {
   userUid: string;
   agent: string;

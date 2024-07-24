@@ -19,9 +19,7 @@ const schema = toTypedSchema(z.object({
 const { handleSubmit } = useForm({
   validationSchema: schema,
 });
-const register = handleSubmit(async (values) => {
-  await registerUser(values);
-});
+const register = handleSubmit(async (values) => await registerUser(values));
 </script>
 
 <template>

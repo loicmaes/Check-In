@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { IconoirProvider } from "@iconoir/vue";
+import {Toaster} from "~/components/ui/toast";
 </script>
 
 <template>
   <div>
     <NuxtRouteAnnouncer />
+    <Toaster />
     <IconoirProvider :icon-props="{
       width: '1rem',
       height: '1rem',

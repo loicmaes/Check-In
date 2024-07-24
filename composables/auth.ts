@@ -33,7 +33,7 @@ export async function registerUser (values: IUserCreateBody): Promise<void> {
       title: "Congratulations 🎉",
       description: "Your account has been created! Welcome in your interface.",
     });
-    navigateTo("/");
+    navigateTo("/app");
   } catch (e) {
     toast({
       title: "Oops... 💢",
@@ -56,7 +56,7 @@ export async function loginUser (values: IAuthSessionLoginBody): Promise<void> {
       title: "Welcome back 👋",
       description: "Keep tracking your time to be more productive!"
     });
-    navigateTo("/");
+    navigateTo("/app");
   } catch (e) {
     toast({
       title: "Oops... 💢",

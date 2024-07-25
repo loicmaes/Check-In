@@ -7,11 +7,11 @@ import {FetchError} from "ofetch";
 export const useAuthCookie = () => useCookie("auth-token");
 
 export async function useUser (): Promise<IUser | undefined> {
-  if (!useAuthCookie()) return undefined;
+  const authCookie = useAuthCookie();
   const user = useState<IUser>("user");
 
-  if (!user.value) {
-    const { data } = await useFetch("/api/auth/me", {
+  if (!user.value && authCookie) {
+    const { data } = await useFetch<IUser>("/api/auth/me", {
       headers: useRequestHeaders(["cookie"])
     });
     if (!data.value) return undefined;
@@ -33,7 +33,7 @@ export async function registerUser (values: IUserCreateBody): Promise<void> {
       title: "Congratulations 🎉",
       description: "Your account has been created! Welcome in your interface.",
     });
-    navigateTo("/");
+    navigateTo("/app");
   } catch (e) {
     toast({
       title: "Oops... 💢",
@@ -56,7 +56,7 @@ export async function loginUser (values: IAuthSessionLoginBody): Promise<void> {
       title: "Welcome back 👋",
       description: "Keep tracking your time to be more productive!"
     });
-    navigateTo("/");
+    navigateTo("/app");
   } catch (e) {
     toast({
       title: "Oops... 💢",

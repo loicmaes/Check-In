@@ -57,7 +57,8 @@ module.exports = {
         sm: "calc(var(--radius) - 4px)",
       },
       width: {
-        card: "min(100% - 3rem, 25rem)"
+        card: "min(100% - 3rem, 25rem)",
+        wrapper: "min(100% - 3rem, 1400px)"
       },
       keyframes: {
         "accordion-down": {

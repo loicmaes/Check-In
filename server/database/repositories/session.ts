@@ -22,7 +22,7 @@ export async function isGenuine (body: IAuthSessionRecoverBody): Promise<boolean
         token: body.token,
       },
       expiresAt: {
-        lt: new Date()
+        gt: new Date(),
       }
     }
   });

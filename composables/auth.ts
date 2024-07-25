@@ -7,11 +7,11 @@ import {FetchError} from "ofetch";
 export const useAuthCookie = () => useCookie("auth-token");
 
 export async function useUser (): Promise<IUser | undefined> {
-  if (!useAuthCookie()) return undefined;
+  const authCookie = useAuthCookie();
   const user = useState<IUser>("user");
 
-  if (!user.value) {
-    const { data } = await useFetch("/api/auth/me", {
+  if (!user.value && authCookie) {
+    const { data } = await useFetch<IUser>("/api/auth/me", {
       headers: useRequestHeaders(["cookie"])
     });
     if (!data.value) return undefined;

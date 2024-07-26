@@ -1,6 +1,6 @@
 import {defineEventHandler, getCookie, sendError, createError} from "#imports";
 import {isGenuine} from "~/server/database/repositories/session";
-import {AuthSessionNotFound, NotGenuineAuthSession} from "~/types/session";
+import {AuthSessionNotFound, NotGenuineAuthSession} from "~/types/authSession";
 import {INTERNAL_SERVER_ERROR} from "~/utils/messages";
 import {authenticate} from "~/server/services/auth";
 import {UserNotFound} from "~/types/user";

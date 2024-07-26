@@ -33,6 +33,17 @@
     --input:20 5.9% 90%;
     --ring:20 14.3% 4.1%;
     --radius: 0.5rem;
+
+    /* ... */
+    --vis-tooltip-background-color: none !important;
+    --vis-tooltip-border-color: none !important;
+    --vis-tooltip-text-color: none !important;
+    --vis-tooltip-shadow-color: none !important;
+    --vis-tooltip-backdrop-filter: none !important;
+    --vis-tooltip-padding: none !important;
+
+    --vis-primary-color: var(--primary);
+    --vis-text-color: var(--muted-foreground);
   }
 
   .dark {
@@ -72,5 +83,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .app-page {
+    @apply w-wrapper mx-auto grid gap-6 py-3;
   }
 }

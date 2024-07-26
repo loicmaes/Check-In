@@ -17,6 +17,8 @@ model User {
   updatedAt DateTime @updatedAt
 
   authSessions AuthSession[]
+  sessions     Session[]
+  projects     Project[]
 
   @@map("users")
 }
@@ -32,4 +34,40 @@ model AuthSession {
 
   @@id([userUid, token])
   @@map("authSessions")
+}
+
+enum SessionType {
+  default
+  live
+}
+
+model Session {
+  uid        String      @id @default(uuid())
+  userUid    String
+  projectUid String?
+  name       String
+  type       SessionType @default(default)
+  startedAt  DateTime    @default(now())
+  endedAt    DateTime?
+
+  user    User     @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+  project Project? @relation(fields: [projectUid], references: [uid], onDelete: SetNull)
+
+  @@unique([name, projectUid])
+  @@map("sessions")
+}
+
+model Project {
+  uid         String   @id @default(uuid())
+  userUid     String
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  sessions Session[]
+
+  user User @relation(fields: [userUid], references: [uid], onDelete: Cascade)
+
+  @@map("projects")
 }

@@ -19,6 +19,8 @@
     "@nuxtjs/color-mode": "^3.4.2",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@prisma/client": "^5.17.0",
+    "@unovis/ts": "^1.4.3",
+    "@unovis/vue": "^1.4.3",
     "@vee-validate/nuxt": "^4.13.2",
     "@vee-validate/zod": "^4.13.2",
     "@vueuse/core": "^10.11.0",

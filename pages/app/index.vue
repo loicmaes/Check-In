@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {definePageMeta, useSeoMeta} from "#imports";
+import {definePageMeta, useSeoMeta, useState} from "#imports";
 import ActiveCard from "~/components/specifics/sessions/ActiveCard.vue";
 import {AreaChart} from "~/components/ui/chart-area";
 import {Card, CardContent, CardHeader} from "~/components/ui/card";

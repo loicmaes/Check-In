@@ -7,6 +7,11 @@ export async function createUser (body: IUserCreateBody): Promise<IUser> {
     return await prisma.user.create({
       data: {
         ...body,
+        projects: {
+          create: {
+            name: `${body.username}'s project`,
+          }
+        }
       },
       select: {
         uid: true,

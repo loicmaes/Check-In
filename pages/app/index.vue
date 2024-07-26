@@ -3,7 +3,6 @@ import {definePageMeta, useSeoMeta} from "#imports";
 import ActiveCard from "~/components/specifics/sessions/ActiveCard.vue";
 import {AreaChart} from "~/components/ui/chart-area";
 import {Card, CardContent, CardHeader} from "~/components/ui/card";
-import type {ISession} from "~/types/session";
 import {CurveType} from "@unovis/ts";
 import ElapsedChartTooltip from "~/components/specifics/sessions/ElapsedChartTooltip.vue";
 import type {IUser} from "~/types/user";

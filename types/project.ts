@@ -15,6 +15,10 @@ export interface IProjectCreateBody {
   description?: string;
   projectUid?: string;
 }
+export interface IProjectUpdateBody {
+  name: string;
+  description?: string;
+}
 
 export class ProjectNotFound extends Error {
   constructor (uid: string) {

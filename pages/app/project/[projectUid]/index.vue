@@ -173,7 +173,7 @@ const handleDelete = async () => {
               <TableCell class="text-right">&times;</TableCell>
             </TableRow>
           </template>
-          <TableRow v-else class="inline-flex items-center justify-center h-10 text-muted-foreground">No content...</TableRow>
+          <TableRow v-else class="w-full inline-flex items-center justify-center h-10 text-muted-foreground">No content...</TableRow>
         </TableBody>
       </Table>
     </template>

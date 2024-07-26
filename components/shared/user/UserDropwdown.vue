@@ -6,8 +6,10 @@ import {defineProps} from "vue";
 import {LogOut, Dashboard} from "@iconoir/vue";
 import type {UserDropdownProps} from "./";
 import {Separator} from "~/components/ui/separator";
+import {logoutUser} from "~/composables/auth";
 
-const props = defineProps<UserDropdownProps>();
+defineProps<UserDropdownProps>();
+const handleLogout = async () => await logoutUser();
 </script>
 
 <template>
@@ -29,7 +31,7 @@ const props = defineProps<UserDropdownProps>();
         </DropdownMenuItem>
         <Separator />
       </template>
-      <DropdownMenuItem class="space-x-2">
+      <DropdownMenuItem class="space-x-2" @click="handleLogout">
         <LogOut />
         <span>Logout</span>
       </DropdownMenuItem>

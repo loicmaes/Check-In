@@ -30,5 +30,8 @@ export default defineNuxtConfig({
           "vee-validate"
       ]
     }
+  },
+  runtimeConfig: {
+    env: "",
   }
 });

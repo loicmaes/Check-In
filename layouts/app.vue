@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {UserProvider} from "~/components/shared/user";
-import type {IUser} from "~/types/user";
+import {useStrictProtectedAccess} from "~/composables/auth";
 
-const user = useState<IUser>("user");
+await useStrictProtectedAccess(true);
 </script>
 
 <template>
@@ -12,9 +12,7 @@ const user = useState<IUser>("user");
       <UserProvider disablePanel />
     </header>
 
-    <main class="w-wrapper mx-auto">
-      <slot />
-    </main>
+    <slot />
   </div>
 </template>
 

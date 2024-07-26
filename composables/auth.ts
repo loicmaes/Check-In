@@ -1,5 +1,5 @@
 import type {IUser, IUserCreateBody} from "~/types/user";
-import type {IAuthSessionLoginBody} from "~/types/session";
+import type {IAuthSessionLoginBody} from "~/types/authSession";
 import {useState, navigateTo, useCookie} from "#imports";
 import {useToast} from "~/components/ui/toast";
 import {FetchError} from "ofetch";
@@ -19,6 +19,12 @@ export async function useUser (): Promise<IUser | undefined> {
   }
 
   return user.value;
+}
+
+export async function useStrictProtectedAccess (loggedIn: boolean): Promise<void> {
+  const user = useState<IUser>("user");
+  if (!loggedIn && user.value) await navigateTo("/app");
+  if (loggedIn && !user.value) await navigateTo("/portal/auth/login");
 }
 
 export async function registerUser (values: IUserCreateBody): Promise<void> {
@@ -75,6 +81,7 @@ export async function logoutUser (all: boolean = false) {
       }
     });
     useState("user").value = null;
+    await navigateTo("/");
   } catch (e) {
     useToast().toast({
       title: "Oops... 💢",

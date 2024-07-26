@@ -154,28 +154,26 @@ const handleDelete = async () => {
       </Dialog>
     </header>
 
-    <template v-if="sessions.length">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Name</TableHead>
-            <TableHead>Type</TableHead>
-            <TableHead>Elapsed</TableHead>
-            <TableHead>Actions</TableHead>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Name</TableHead>
+          <TableHead>Type</TableHead>
+          <TableHead>Elapsed</TableHead>
+          <TableHead>Actions</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <template v-if="sessions.length">
+          <TableRow v-for="session in sessions" :key="session.uid">
+            <TableCell>{{ session.name }}</TableCell>
+            <TableCell class="capitalize">{{ session.type }}</TableCell>
+            <TableCell class="text-center">{{ session.elapsed ? `${session.elapsed}h` : "-" }}</TableCell>
+            <TableCell class="text-right">&times;</TableCell>
           </TableRow>
-        </TableHeader>
-        <TableBody>
-          <template v-if="sessions.length">
-            <TableRow v-for="session in sessions" :key="session.uid">
-              <TableCell>{{ session.name }}</TableCell>
-              <TableCell class="capitalize">{{ session.type }}</TableCell>
-              <TableCell class="text-center">{{ session.elapsed ? `${session.elapsed}h` : "-" }}</TableCell>
-              <TableCell class="text-right">&times;</TableCell>
-            </TableRow>
-          </template>
-          <TableRow v-else class="w-full inline-flex items-center justify-center h-10 text-muted-foreground">No content...</TableRow>
-        </TableBody>
-      </Table>
-    </template>
+        </template>
+        <TableRow v-else class="w-full inline-flex items-center justify-center h-10 text-muted-foreground">No content...</TableRow>
+      </TableBody>
+    </Table>
   </main>
 </template>

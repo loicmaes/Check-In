@@ -1,4 +1,4 @@
-import {AuthSessionNotFound, IAuthSession, IAuthSessionCreateBody, IAuthSessionRecoverBody} from "~/types/session";
+import {AuthSessionNotFound, IAuthSession, IAuthSessionCreateBody, IAuthSessionRecoverBody} from "~/types/authSession";
 import prisma from "~/server/database/client";
 
 export async function createSession (body: IAuthSessionCreateBody, duration: number = 3600000): Promise<IAuthSession> {

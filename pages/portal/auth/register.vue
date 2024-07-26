@@ -9,7 +9,16 @@ import {useForm} from "vee-validate";
 import {Input} from "~/components/ui/input";
 import {USERNAME_REGEX, PASSWORD_REGEX} from "~/utils/regex";
 import {Separator} from "~/components/ui/separator";
-import { registerUser } from "#imports";
+import { registerUser, definePageMeta, useSeoMeta } from "#imports";
+import {useStrictProtectedAccess} from "~/composables/auth";
+
+await useStrictProtectedAccess(false);
+definePageMeta({
+  layout: "auth",
+});
+useSeoMeta({
+  title: "Check In · Register"
+});
 
 const schema = toTypedSchema(z.object({
   username: z.string().min(1).regex(USERNAME_REGEX),
@@ -23,7 +32,7 @@ const register = handleSubmit(async (values) => await registerUser(values));
 </script>
 
 <template>
-  <Card class="w-card mx-auto my-6">
+  <Card class="w-card">
     <CardHeader class="pt-4 gap-4">
       <Button variant="ghost" size="xs" as-child>
         <NuxtLink to="/" class="self-start gap-2 -ml-3">

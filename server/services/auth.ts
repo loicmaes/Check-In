@@ -5,8 +5,8 @@ import {
   IAuthSessionLoginBody,
   IAuthSessionOptions,
   IAuthSessionRecoverBody, NotGenuineAuthSession
-} from "~/types/session";
-import {getCookie, setCookie} from "#imports";
+} from "~/types/authSession";
+import {getCookie, setCookie, deleteCookie, useRuntimeConfig} from "#imports";
 import {EventHandlerRequest, H3Event} from "h3";
 import {createUser, recoverUserByUid, recoverUserByUsername} from "~/server/database/repositories/user";
 import {
@@ -38,16 +38,17 @@ export async function login (event: H3Event<EventHandlerRequest>, body: IAuthSes
   return user;
 }
 export async function makeSession (event: H3Event<EventHandlerRequest>, body: IAuthSessionCreateBody): Promise<IAuthSession> {
+  const config = useRuntimeConfig();
   const session = await createSession(body, (body.options?.keep ? 24 * 7 : 1) * 3600 * 1000);
 
   setCookie(event, "user-uid", session.userUid, {
     path: "/",
-    secure: true,
+    secure: config.env !== "development",
     httpOnly: true,
   });
   setCookie(event, "auth-token", session.token, {
     path: "/",
-    secure: true,
+    secure: config.env !== "development",
     httpOnly: true,
   });
 
@@ -79,6 +80,6 @@ export async function logout (event: H3Event<EventHandlerRequest>, large: boolea
     });
   }
 
-  setCookie(event, "user-uid", "");
-  setCookie(event, "auth-token", "");
+  deleteCookie(event, "user-uid");
+  deleteCookie(event, "auth-token");
 }

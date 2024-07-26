@@ -11,12 +11,10 @@ import {
   AlertDialogContent, AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader, AlertDialogTitle,
-  AlertDialogTrigger
 } from "~/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu";
@@ -167,12 +165,15 @@ const handleDelete = async () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow v-for="session in sessions" :key="session.uid">
-            <TableCell>{{ session.name }}</TableCell>
-            <TableCell class="capitalize">{{ session.type }}</TableCell>
-            <TableCell class="text-center">{{ session.elapsed ? `${session.elapsed}h` : "-" }}</TableCell>
-            <TableCell class="text-right">&times;</TableCell>
-          </TableRow>
+          <template v-if="sessions.length">
+            <TableRow v-for="session in sessions" :key="session.uid">
+              <TableCell>{{ session.name }}</TableCell>
+              <TableCell class="capitalize">{{ session.type }}</TableCell>
+              <TableCell class="text-center">{{ session.elapsed ? `${session.elapsed}h` : "-" }}</TableCell>
+              <TableCell class="text-right">&times;</TableCell>
+            </TableRow>
+          </template>
+          <TableRow v-else class="inline-flex items-center justify-center h-10 text-muted-foreground">No content...</TableRow>
         </TableBody>
       </Table>
     </template>

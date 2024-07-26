@@ -3,7 +3,7 @@ import {definePageMeta} from "#imports";
 import {TableBody, TableCell, TableHead, TableHeader, TableRow} from "~/components/ui/table";
 import {useDraftSessions} from "~/composables/project";
 import type {ISession} from "~/types/session";
-import {ref, onMounted} from "vue";
+import {ref} from "vue";
 
 definePageMeta({
   layout: "app",
@@ -42,7 +42,7 @@ const sessions = ref<(ISession & { elapsed: number | null })[]>((await useDraftS
             <TableCell class="text-right">&times;</TableCell>
           </TableRow>
         </template>
-        <TableRow v-else>No content...</TableRow>
+        <TableRow v-else class="inline-flex items-center justify-center h-10 text-muted-foreground">No content...</TableRow>
       </TableBody>
     </Table>
   </main>

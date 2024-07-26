@@ -4,6 +4,9 @@ import type {IProject} from "~/types/project";
 import {ref} from "vue";
 import {useState} from "#imports";
 import CreateDialog from "~/components/shared/app/project/CreateDialog.vue";
+import {Button} from "~/components/ui/button";
+import {Dashboard} from "@iconoir/vue";
+import {SheetClose} from "~/components/ui/sheet";
 
 const projects = useState<IProject[]>("projects");
 
@@ -13,6 +16,14 @@ const newProjectDialog = ref<boolean>(false);
 <template>
   <div class="flex flex-col gap-6">
     <SideBarSection>
+      <SheetClose asChild>
+        <Button variant="ghost" class="justify-start -ml-2" asChild>
+          <NuxtLink to="/app" active-class="text-primary">
+            <Dashboard class="mr-2" />
+            <span>Overview</span>
+          </NuxtLink>
+        </Button>
+      </SheetClose>
       <SideBarItem projectUid="draft">Draft</SideBarItem>
     </SideBarSection>
     <SideBarSection>

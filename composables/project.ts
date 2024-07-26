@@ -1,5 +1,6 @@
 import {useState, useRequestHeaders, navigateTo} from "#imports";
 import type {IProject, IProjectCreateBody, IRichProject} from "~/types/project";
+import type {ISession} from "~/types/session";
 
 export async function useProjects (): Promise<IProject[]> {
   const projects = useState<IProject[]>("projects", () => []);
@@ -16,6 +17,12 @@ export async function useRichProject (projectUid: string): Promise<IRichProject 
     headers: useRequestHeaders(["cookie"])
   });
   return data.value;
+}
+export async function useDraftSessions (): Promise<ISession[]> {
+  const { data } = await useFetch<ISession[]>("/api/project/draft/recover", {
+    headers: useRequestHeaders(["cookie"])
+  });
+  return data.value ?? [];
 }
 export async function createProject (body: IProjectCreateBody) {
   try {
@@ -43,4 +50,14 @@ export async function deleteProject (projectUid: string) {
   } catch (e) {
     // TODO: toast.
   }
+}
+export async function updateProject (projectUid: string, name: string, description?: string): Promise<IRichProject> {
+  return await $fetch<IRichProject>(`/api/project/${projectUid}/edit`, {
+    headers: useRequestHeaders(["cookie"]),
+    method: "PUT",
+    body: {
+      name,
+      description
+    }
+  });
 }

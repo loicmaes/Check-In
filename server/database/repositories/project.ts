@@ -1,6 +1,13 @@
-import {IProject, IProjectCreateBody, ProjectConflictingName, ProjectNotFound} from "~/types/project";
+import {
+  IProject,
+  IProjectCreateBody,
+  IProjectUpdateBody, IRichProject,
+  ProjectConflictingName,
+  ProjectNotFound
+} from "~/types/project";
 import prisma from "~/server/database/client";
 import {PrismaClientKnownRequestError} from "@prisma/client/runtime/binary";
+import {ISession} from "~/types/session";
 
 export async function createProject (userUid: string, body: IProjectCreateBody): Promise<IProject> {
   try {
@@ -65,4 +72,36 @@ export async function deleteProject (userUid: string, projectUid: string) {
       uid: projectUid,
     }
   });
+}
+export async function updateProject (userUid: string, projectUid: string, body: IProjectUpdateBody): Promise<IProject> {
+  return prisma.project.update({
+    where: {
+      userUid,
+      uid: projectUid,
+    },
+    data: body,
+    include: {
+      sessions: {
+        omit: {
+          userUid: true,
+          projectUid: true,
+        }
+      }
+    },
+    omit: {
+      userUid: true,
+    },
+  });
+}
+export async function recoverUnCategorizedSessions (userUid: string): Promise<ISession[]> {
+  return (await prisma.session.findMany({
+    where: {
+      userUid,
+      projectUid: null,
+    },
+    omit: {
+      projectUid: true,
+      userUid: true,
+    }
+  })) as ISession[];
 }

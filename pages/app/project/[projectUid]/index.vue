@@ -5,35 +5,18 @@ import {deleteProject, updateProject, useRichProject} from "~/composables/projec
 import {TableBody, TableCell, TableHead, TableHeader, TableRow} from "~/components/ui/table";
 import type {ISession} from "~/types/session";
 import {Button} from "~/components/ui/button";
-import {Trash, MoreHoriz, EditPencil} from "@iconoir/vue";
-import {
-  AlertDialog, AlertDialogAction, AlertDialogCancel,
-  AlertDialogContent, AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader, AlertDialogTitle,
-} from "~/components/ui/alert-dialog";
+import {Trash, MoreHoriz, EditPencil, Plus} from "@iconoir/vue";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "~/components/ui/dropdown-menu";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle
-} from "~/components/ui/dialog";
+import {EditDialog, DeleteDialog, type EditDialogEmitOptions} from "~/components/specifics/projects";
 import type {IRichProject} from "~/types/project";
-import {useForm} from "vee-validate";
-import {toTypedSchema} from "@vee-validate/zod";
-import * as z from "zod";
-import {FormControl, FormField, FormItem, FormLabel} from "~/components/ui/form";
-import {Input} from "~/components/ui/input";
 import {useToast} from "~/components/ui/toast";
 import {FetchError} from "ofetch";
+import {CreateDialog} from "~/components/shared/app/session";
 
 definePageMeta({
   layout: "app",
@@ -45,6 +28,7 @@ const { projectUid } = params;
 const { toast } = useToast();
 const deleteDialogOpen = ref<boolean>(false);
 const editDialogOpen = ref<boolean>(false);
+const createSessionDialogOpen = ref<boolean>(false);
 
 const project = ref<IRichProject | null>(await useRichProject(projectUid as string));
 const sessions = computed(() => project.value?.sessions.map((session: ISession) => ({
@@ -54,14 +38,7 @@ const sessions = computed(() => project.value?.sessions.map((session: ISession) 
       : null,
 })) || []);
 
-const editSchema = toTypedSchema(z.object({
-  name: z.string().min(1).default(project.value?.name as string),
-  description: z.string().optional(),
-}));
-const editForm = useForm({
-  validationSchema: editSchema,
-});
-const handleEdit = editForm.handleSubmit(async ({ name, description }) => {
+const handleEdit = async ({ name, description }: EditDialogEmitOptions) => {
   if (!project.value) return;
   try {
     project.value = await updateProject(project.value.uid, name, description);
@@ -77,8 +54,7 @@ const handleEdit = editForm.handleSubmit(async ({ name, description }) => {
       variant: "destructive",
     });
   }
-});
-
+};
 const handleDelete = async () => {
   if (!project.value) return;
   await deleteProject(project.value.uid);
@@ -109,49 +85,16 @@ const handleDelete = async () => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <AlertDialog :open="deleteDialogOpen" @update:open="deleteDialogOpen = $event">
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
-            <AlertDialogDescription>This action is definitive! All the data related to this project will be lost.</AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction @click="handleDelete">Yes, continue</AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-      <Dialog :open="editDialogOpen" @update:open="editDialogOpen = $event">
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Edit post</DialogTitle>
-            <DialogDescription>Don't forget to make it clear for your!</DialogDescription>
-          </DialogHeader>
+      <Button class="fixed bottom-6 right-6" size="icon" @click="createSessionDialogOpen = true"><Plus /></Button>
 
-          <form @submit="handleEdit" class="flex flex-col gap-4">
-            <FormField name="name" v-slot="{ componentField }">
-              <FormItem>
-                <FormLabel>Name <span class="text-primary">*</span></FormLabel>
-                <FormControl>
-                  <Input v-bind="componentField" placeholder="My awesome project" :default-value="project?.name" />
-                </FormControl>
-              </FormItem>
-            </FormField>
-            <FormField name="description" v-slot="{ componentField }">
-              <FormItem>
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Input v-bind="componentField" placeholder="Describe me the best you can! (optional)" :default-value="project?.description ?? undefined" />
-                </FormControl>
-              </FormItem>
-            </FormField>
-
-            <DialogFooter class="self-end">
-              <Button type="submit">Save changes</Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+      <DeleteDialog :opened="deleteDialogOpen" @update:opened="deleteDialogOpen = $event" @request:delete="handleDelete" />
+      <EditDialog :project="project ?? undefined" :opened="editDialogOpen" @update:opened="editDialogOpen = $event" @request:edit="handleEdit" />
+      <CreateDialog
+          :opened="createSessionDialogOpen"
+          @update:opened="createSessionDialogOpen = $event"
+          @request:create:live="handleLiveCreation"
+          @request:create:ended="handleEndedCreation"
+      />
     </header>
 
     <Table>

@@ -1,7 +1,7 @@
 import {defineEventHandler, readBody, sendError, createError} from "#imports";
 import {IProjectCreateBody, ProjectConflictingName} from "~/types/project";
 import {createProject} from "~/server/database/repositories/project";
-import {INTERNAL_SERVER_ERROR, SESSION_EXPIRED} from "~/utils/messages";
+import {INTERNAL_SERVER_ERROR} from "~/utils/messages";
 import {isAuthenticated} from "~/server/services/auth";
 import {H3Error} from "h3";
 

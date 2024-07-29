@@ -82,7 +82,7 @@ const handleEdit = editForm.handleSubmit(async ({ name, description }) => {
 const handleDelete = async () => {
   if (!project.value) return;
   await deleteProject(project.value.uid);
-}
+};
 </script>
 
 <template>

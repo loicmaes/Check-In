@@ -26,12 +26,12 @@ export default defineEventHandler (async (event) => {
         return sendError(event, createError({
           statusCode: 409,
           statusMessage: "The new name you're trying to set is already taken!",
-        }))
+        }));
       default:
         return sendError(event, createError({
           statusCode: 500,
           statusMessage: INTERNAL_SERVER_ERROR,
-        }))
+        }));
     }
   }
 });

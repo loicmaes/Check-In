@@ -11,11 +11,11 @@ export default defineEventHandler (async (event) => {
   try {
     const drafts = await recoverUnCategorizedSessions(authenticated);
     if (!drafts.length) return;
-    return drafts
+    return drafts;
   } catch (e) {
     return sendError(event, createError({
       statusCode: 500,
       statusMessage: INTERNAL_SERVER_ERROR,
-    }))
+    }));
   }
 });

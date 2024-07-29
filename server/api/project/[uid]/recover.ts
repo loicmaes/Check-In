@@ -13,7 +13,7 @@ export default defineEventHandler (async (event) => {
   if (!projectUid) return sendError(event, createError({
     statusCode: 400,
     statusMessage: "Project uid is missing!",
-  }))
+  }));
 
   try {
     return await recoverProject(authenticated, projectUid);

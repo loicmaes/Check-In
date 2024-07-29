@@ -1,7 +1,6 @@
 import {defineEventHandler, readBody, sendError, createError} from "#imports";
 import {IProjectCreateBody, ProjectConflictingName} from "~/types/project";
 import {createProject} from "~/server/database/repositories/project";
-import {isGenuine} from "~/server/database/repositories/session";
 import {INTERNAL_SERVER_ERROR, SESSION_EXPIRED} from "~/utils/messages";
 import {isAuthenticated} from "~/server/services/auth";
 import {H3Error} from "h3";
@@ -22,6 +21,6 @@ export default defineEventHandler(async (event) => {
     return sendError(event, createError({
       statusCode: 500,
       statusMessage: INTERNAL_SERVER_ERROR,
-    }))
+    }));
   }
 });

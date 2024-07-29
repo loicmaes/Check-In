@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {definePageMeta, useRoute} from "#imports";
-import {computed} from "vue";
+import {ref, computed} from "vue";
 import {deleteProject, updateProject, useRichProject} from "~/composables/project";
 import {TableBody, TableCell, TableHead, TableHeader, TableRow} from "~/components/ui/table";
 import type {ISession} from "~/types/session";

@@ -1,6 +1,4 @@
-import {createError, defineEventHandler, getCookie, sendError, setResponseStatus} from "#imports";
-import {isGenuine} from "~/server/database/repositories/session";
-import {SESSION_EXPIRED} from "~/utils/messages";
+import {defineEventHandler, sendError} from "#imports";
 import {recoverProjectsList} from "~/server/database/repositories/project";
 import {isAuthenticated} from "~/server/services/auth";
 import {H3Error} from "h3";

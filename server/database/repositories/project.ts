@@ -1,7 +1,7 @@
 import {
   IProject,
   IProjectCreateBody,
-  IProjectUpdateBody, IRichProject,
+  IProjectUpdateBody,
   ProjectConflictingName,
   ProjectNotFound
 } from "~/types/project";

@@ -6,7 +6,7 @@ import {
   IAuthSessionOptions,
   IAuthSessionRecoverBody, NotGenuineAuthSession
 } from "~/types/authSession";
-import {getCookie, setCookie, deleteCookie, useRuntimeConfig, sendError, createError} from "#imports";
+import {getCookie, setCookie, deleteCookie, useRuntimeConfig, createError} from "#imports";
 import {EventHandlerRequest, H3Error, H3Event} from "h3";
 import {createUser, recoverUserByUid, recoverUserByUsername} from "~/server/database/repositories/user";
 import {
